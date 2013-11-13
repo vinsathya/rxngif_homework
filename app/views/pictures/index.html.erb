@@ -1,8 +1,17 @@
 <h1>All Pictures</h1>
 
-<% @list_of_pictures.each do |pic|  %>
+<%= link_to "Add a new picture", new_picture_url %>
 
-	<p><img width=200 src="<%= pic.source %>"></p>
-	<p><%= pic.caption %></p>
+<ul>
+	<% @list_of_pictures.each do |pic|  %>
 
-<% end %>
+		<div>
+		<p><img width=200 src="<%= pic.source %>"></p>
+		</div>
+		<p><%= pic.caption %></p>
+		<%= link_to "Edit", edit_picture_url(pic.id), :method => "get" %>
+		<%= link_to "Show", picture_url(pic.id), :method => "get" %>
+		<%= link_to "Destroy", picture_url(pic.id), :method => "delete" %>
+
+	<% end %>
+</ul>

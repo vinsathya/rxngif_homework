@@ -9,6 +9,7 @@ class PicturesController < ApplicationController
   end
 
   def new
+    
   end
 
   def create
@@ -19,15 +20,18 @@ class PicturesController < ApplicationController
     p.source = @source
     p.caption = @caption
     p.save
+    redirect_to(pictures_url, { :notice => "Picture created successfully."})
   end
 
   def destroy
     @id = params[:id].to_i
     Picture.find(@id).destroy
+    redirect_to(pictures_url, { :notice => "Picture has been toasted."})
   end
 
   def edit
     @id = params[:id].to_i
+    @picture = Picture.find(@id)
 
     @caption = Picture.find(@id).caption
     @source = Picture.find(@id).source
@@ -44,6 +48,7 @@ class PicturesController < ApplicationController
     p.save
 
     @picture = Picture.find(@id)
+    redirect_to picture_url(p.id), :notice => "Picture has been updated."
   end
 
 end
